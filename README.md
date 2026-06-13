@@ -1,42 +1,42 @@
 # DualBox
 
-DualBox is a Windows app that turns a PS5 DualSense or DualSense Edge into a virtual Xbox controller for Game Pass and other XInput-first PC games.
+DualBox turns a PS5 DualSense or DualSense Edge into a virtual Xbox controller for Windows Game Pass and XInput-first PC games.
 
-The first target is the out-of-box feel you want for Forza:
+## Features
 
-- DualSense input is read directly over HID.
-- A virtual Xbox 360 controller is created through ViGEmBus.
-- XInput rumble feedback is translated back to DualSense motor output.
-- A racing-biased rumble translator smooths and shapes vibration for road/engine-style feedback.
-- A racing adaptive-trigger profile adds brake/throttle resistance directly on the DualSense.
-- Touchpad press defaults to Xbox View/Back, which is a good first guess for map-style actions.
-- Touchpad press can be changed to Menu/Start, Guide, or disabled in the app before starting the bridge.
-- PS button presses can open Xbox Game Bar by sending `Windows+G`.
-- Left and right stick deadzone sliders help compensate for stick drift.
-- The live testing area shows raw sticks, filtered Xbox stick output, buttons, triggers, trigger bars, drift status, and recent rumble.
-- Touchpad and adaptive-trigger choices are saved under the user's Windows app data folder.
-- The app registers itself to open on Windows launch by default.
-- HidHide is recommended so games see only the virtual Xbox controller, not both controllers.
+- DualSense USB and Bluetooth input support
+- Virtual Xbox 360 controller output through ViGEmBus
+- DualSense vibration from Xbox rumble feedback
+- Racing-tuned rumble shaping
+- Racing adaptive-trigger profile
+- Touchpad mapping for View/Back, Menu/Start, Guide, or disabled
+- PS button shortcut for Xbox Game Bar
+- Stick deadzone controls for drift cleanup
+- Live input, trigger, button, rumble, and drift status panel
+- Optional launch on Windows startup
 
-## Reality check
+## Download
 
-This app can make a DualSense behave like a supported Xbox controller to Game Pass games. It can translate normal XInput vibration to the DualSense motors.
+The standalone Windows build is included at:
 
-It cannot create true PS5 adaptive-trigger effects or Sony game-specific HD haptics from nothing if the PC game only sends ordinary XInput rumble. That information is not present in the Xbox controller API. For games that expose native DualSense output, a separate passthrough mode can be added later, but that is a different path than Xbox emulation.
+```text
+artifacts\DualBox-win-x64.zip
+```
 
-## Windows prerequisites
+Extract the zip and run:
 
-Install these before building:
+```text
+DualBox.exe
+```
 
-1. .NET 8 SDK
-2. ViGEmBus, so the virtual Xbox controller can exist
-3. HidHide, so the physical DualSense can be hidden from games while this app is allowed to read it
+## Requirements
 
-The published standalone app does not require the .NET runtime on the gaming PC, but ViGEmBus and HidHide are still driver-level dependencies.
+- Windows 10 or 11
+- ViGEmBus
+- HidHide
+- PS5 DualSense or DualSense Edge controller
 
-ViGEmBus is retired, but it is still the common signed virtual-controller bus used by tools such as DS4Windows. Avoid random download mirrors; use the official Nefarius/GitHub sources.
-
-## Build
+## Build From Source
 
 From a Windows terminal:
 
@@ -59,19 +59,17 @@ artifacts\publish\win-x64\DualBox.exe
 artifacts\DualBox-win-x64.zip
 ```
 
-For a prerequisite and build check:
+## Test
 
 ```powershell
 .\scripts\smoke-test.ps1 -Build
 ```
 
-To run parser and rumble-shaping checks without controller hardware:
-
 ```powershell
 .\scripts\run-protocol-selftest.ps1
 ```
 
-## First Forza test
+## Forza Setup
 
 1. Connect the DualSense over USB for the first test.
 2. Open DualBox.
@@ -99,29 +97,19 @@ HidHide is what prevents double input.
 
 The game should now only see the virtual Xbox controller.
 
-## Current implementation status
+## Status
 
 - USB input parsing: implemented
-- Bluetooth input parsing: implemented by report offset, needs Windows hardware validation
+- Bluetooth input parsing: implemented
 - USB rumble output: implemented
-- Bluetooth rumble output: implemented with CRC report framing, needs Windows hardware validation
+- Bluetooth rumble output: implemented
 - Racing-biased rumble shaping: implemented
-- Racing adaptive-trigger profile: implemented, needs Windows hardware validation
-- PS button to Game Bar hotkey: implemented, needs Windows validation
+- Racing adaptive-trigger profile: implemented
+- PS button to Game Bar hotkey: implemented
 - Start with Windows: implemented via HKCU Run key
 - Stick drift deadzone controls: implemented
 - Virtual Xbox 360 output: implemented
 - Touchpad-to-map-style binding: implemented
-- Installer/MSIX: not implemented yet
-
-## Next engineering steps
-
-1. Build on Windows and fix any package/API drift from `Nefarius.ViGEm.Client`.
-2. Validate DualSense USB report parsing in the live input panel.
-3. Validate rumble in `joy.cpl` and in Forza.
-4. Add a controller calibration screen for stick dead zones and trigger curves.
-5. Tune brake/throttle resistance after the first real Forza drive.
-6. Add per-game profiles once the Forza mapping is confirmed.
 
 See [docs/TEST_PLAN.md](docs/TEST_PLAN.md) for the step-by-step Windows validation flow, [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for likely first-test issues, and [docs/PROTOCOL_NOTES.md](docs/PROTOCOL_NOTES.md) for HID report references.
 
