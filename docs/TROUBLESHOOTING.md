@@ -8,10 +8,10 @@ The virtual Xbox controller cannot be created until ViGEmBus is installed. Insta
 
 Configure HidHide:
 
-1. Add `DualSensePass.exe` to the allow list.
+1. Add `DualBox.exe` to the allow list.
 2. Hide the physical DualSense device.
 3. Enable device hiding.
-4. Restart DualSense Pass and the game.
+4. Restart DualBox and the game.
 
 If duplicate input remains, open `joy.cpl` and check whether both the physical DualSense and the virtual Xbox controller are visible.
 
@@ -63,21 +63,21 @@ If the triggers still feel normal, use USB for validation first. Bluetooth trigg
 
 ## Adaptive triggers feel generic
 
-That is expected for Xbox-emulation mode. XInput has ordinary vibration but no DualSense adaptive-trigger data. DualSense Pass can apply a racing profile locally, but it cannot receive true PS5 game-authored trigger curves from an XInput-only Game Pass title.
+That is expected for Xbox-emulation mode. XInput has ordinary vibration but no DualSense adaptive-trigger data. DualBox can apply a racing profile locally, but it cannot receive true PS5 game-authored trigger curves from an XInput-only Game Pass title.
 
 ## Settings reset unexpectedly
 
-The app stores settings at `%APPDATA%\DualSensePass\settings.json`. Delete that file to reset to defaults: touchpad press as View/Back and adaptive triggers as Racing.
+The app stores settings at `%APPDATA%\DualBox\settings.json`. Delete that file to reset to defaults: touchpad press as View/Back and adaptive triggers as Racing.
 
 ## App does not open when Windows starts
 
-Make sure `Open on Windows launch` is checked. The app registers itself in `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` as `DualSensePass`, which does not require administrator rights.
+Make sure `Open on Windows launch` is checked. The app registers itself in `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` as `DualBox`, which does not require administrator rights.
 
 If you are running from `dotnet run`, publish the app first with `.\scripts\build-release.ps1`, run the published app once, and leave `Open on Windows launch` checked.
 
 ## PS button does not open Game Bar
 
-Make sure `PS button opens Game Bar` is checked. DualSense Pass sends `Windows+G` on the first PS-button press event.
+Make sure `PS button opens Game Bar` is checked. DualBox sends `Windows+G` on the first PS-button press event.
 
 If nothing opens, check Windows Settings and make sure Xbox Game Bar is enabled. Some full-screen games or overlays may intercept the shortcut.
 

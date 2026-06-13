@@ -6,10 +6,10 @@ param(
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$project = Join-Path $root "src\DualSensePass.App\DualSensePass.App.csproj"
+$project = Join-Path $root "src\DualBox.App\DualBox.App.csproj"
 $artifacts = Join-Path $root "artifacts"
 $output = Join-Path $artifacts "publish\$Runtime"
-$zip = Join-Path $artifacts "DualSensePass-$Runtime.zip"
+$zip = Join-Path $artifacts "DualBox-$Runtime.zip"
 
 if (-not $SkipSelfTest) {
     & (Join-Path $root "scripts\run-protocol-selftest.ps1")
@@ -36,5 +36,5 @@ dotnet publish $project `
 
 Compress-Archive -Path (Join-Path $output "*") -DestinationPath $zip
 
-Write-Host "Published standalone DualSense Pass to $output"
+Write-Host "Published standalone DualBox to $output"
 Write-Host "Created release zip at $zip"

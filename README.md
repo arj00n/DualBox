@@ -1,6 +1,6 @@
-# DualSense Pass
+# DualBox
 
-DualSense Pass is a Windows app that turns a PS5 DualSense or DualSense Edge into a virtual Xbox controller for Game Pass and other XInput-first PC games.
+DualBox is a Windows app that turns a PS5 DualSense or DualSense Edge into a virtual Xbox controller for Game Pass and other XInput-first PC games.
 
 The first target is the out-of-box feel you want for Forza:
 
@@ -41,9 +41,9 @@ ViGEmBus is retired, but it is still the common signed virtual-controller bus us
 From a Windows terminal:
 
 ```powershell
-cd path\to\DualSensePass
-dotnet restore .\src\DualSensePass.App\DualSensePass.App.csproj
-dotnet run --project .\src\DualSensePass.App\DualSensePass.App.csproj -c Release
+cd path\to\DualBox
+dotnet restore .\src\DualBox.App\DualBox.App.csproj
+dotnet run --project .\src\DualBox.App\DualBox.App.csproj -c Release
 ```
 
 For a standalone Windows build:
@@ -55,8 +55,8 @@ For a standalone Windows build:
 This creates:
 
 ```text
-artifacts\publish\win-x64\DualSensePass.exe
-artifacts\DualSensePass-win-x64.zip
+artifacts\publish\win-x64\DualBox.exe
+artifacts\DualBox-win-x64.zip
 ```
 
 For a prerequisite and build check:
@@ -74,7 +74,7 @@ To run parser and rumble-shaping checks without controller hardware:
 ## First Forza test
 
 1. Connect the DualSense over USB for the first test.
-2. Open DualSense Pass.
+2. Open DualBox.
 3. Confirm the app says ViGEmBus is found.
 4. Set touchpad press to `View / Back`.
 5. Keep adaptive triggers set to `Racing`.
@@ -92,10 +92,10 @@ To run parser and rumble-shaping checks without controller hardware:
 HidHide is what prevents double input.
 
 1. Open HidHide Configuration Client.
-2. Add `DualSensePass.exe` to the Applications allow list.
+2. Add `DualBox.exe` to the Applications allow list.
 3. On Devices, hide the physical DualSense.
 4. Enable device hiding.
-5. Restart DualSense Pass.
+5. Restart DualBox.
 
 The game should now only see the virtual Xbox controller.
 

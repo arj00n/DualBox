@@ -12,8 +12,8 @@ On Windows with the .NET 8 SDK installed:
 
 Output:
 
-- `artifacts\publish\win-x64\DualSensePass.exe`
-- `artifacts\DualSensePass-win-x64.zip`
+- `artifacts\publish\win-x64\DualBox.exe`
+- `artifacts\DualBox-win-x64.zip`
 
 ## Run the published app
 
@@ -24,7 +24,7 @@ Output:
 Or open:
 
 ```text
-artifacts\publish\win-x64\DualSensePass.exe
+artifacts\publish\win-x64\DualBox.exe
 ```
 
 ## What still must be installed

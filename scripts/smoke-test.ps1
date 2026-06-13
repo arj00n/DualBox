@@ -4,7 +4,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$project = Join-Path $root "src\DualSensePass.App\DualSensePass.App.csproj"
+$project = Join-Path $root "src\DualBox.App\DualBox.App.csproj"
 
 function Test-ServiceKey {
     param([string]$Name)
@@ -12,7 +12,7 @@ function Test-ServiceKey {
     Test-Path $path
 }
 
-Write-Host "DualSense Pass smoke test"
+Write-Host "DualBox smoke test"
 Write-Host "-------------------------"
 
 if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) {

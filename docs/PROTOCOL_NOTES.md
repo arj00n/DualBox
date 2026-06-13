@@ -1,6 +1,6 @@
 # Protocol Notes
 
-These notes record the HID report facts used by DualSense Pass. They are here so the hardware-specific bytes are auditable during Windows testing.
+These notes record the HID report facts used by DualBox. They are here so the hardware-specific bytes are auditable during Windows testing.
 
 ## References
 
@@ -9,7 +9,7 @@ These notes record the HID report facts used by DualSense Pass. They are here so
 - `DS4Windows/DS4Library/InputDevices/TriggerEffects.cs`
 - ViGEm.NET source: `nefarius/ViGEm.NET`
 
-The DS4Windows files are GPL-licensed. DualSense Pass uses them only as a public protocol reference for report offsets and mode values; code was not copied.
+The DS4Windows files are GPL-licensed. DualBox uses them only as a public protocol reference for report offsets and mode values; code was not copied.
 
 ## Output reports
 
