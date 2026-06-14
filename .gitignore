@@ -6,3 +6,7 @@ artifacts/*
 *.user
 *.suo
 .DS_Store
+drivers/**/x64/
+drivers/**/*.log
+drivers/**/*.tlog/
+drivers/**/*.vcxproj.user

@@ -106,14 +106,16 @@ The game should now only see the virtual Xbox controller.
 - Bluetooth feedback output: implemented
 - Xbox One-style four-channel feedback model: implemented
 - XInput compatibility backend: implemented
+- DualBox virtual pad driver scaffold: implemented
+- DualBox driver feeder backend: implemented
 - Racing-biased rumble shaping: implemented
 - Racing adaptive-trigger profile: implemented
 - PS button to Game Bar hotkey: implemented
 - Start with Windows: implemented via HKCU Run key
 - Stick drift deadzone controls: implemented
-- True Xbox One virtual device backend: planned
+- True Xbox One virtual device backend: scaffolded, needs WDK hardware validation
 - Touchpad-to-map-style binding: implemented
 
-See [docs/TEST_PLAN.md](docs/TEST_PLAN.md) for the step-by-step Windows validation flow, [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for likely first-test issues, and [docs/PROTOCOL_NOTES.md](docs/PROTOCOL_NOTES.md) for HID report references.
+See [docs/TEST_PLAN.md](docs/TEST_PLAN.md) for the step-by-step Windows validation flow, [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for likely first-test issues, [docs/DRIVER.md](docs/DRIVER.md) for the virtual driver path, and [docs/PROTOCOL_NOTES.md](docs/PROTOCOL_NOTES.md) for HID report references.
 
 See [docs/RELEASE.md](docs/RELEASE.md) for standalone publishing details.

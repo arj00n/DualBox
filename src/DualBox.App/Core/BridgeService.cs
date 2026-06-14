@@ -32,7 +32,9 @@ public sealed class BridgeService : IAsyncDisposable
 
         _dualSense = DualSenseHidDevice.Open(deviceInfo);
         _dualSense.SetTriggerState(GetTriggerState(profile.TriggerProfile));
-        _xboxBackend = new XInputCompatibilityBackend();
+        _xboxBackend = DualBoxDriverBackend.TryCreate(out var driverBackend)
+            ? driverBackend!
+            : new XInputCompatibilityBackend();
         _xboxBackend.FeedbackReceived += ForwardFeedback;
         _xboxBackend.Connect();
 

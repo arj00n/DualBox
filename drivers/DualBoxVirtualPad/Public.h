@@ -1,0 +1,41 @@
+#pragma once
+
+#include <wdm.h>
+
+DEFINE_GUID(GUID_DEVINTERFACE_DUALBOX_VIRTUAL_PAD,
+    0xa35610d3, 0x6b1d, 0x4fd1, 0xa6, 0x61, 0x23, 0x70, 0xa4, 0x33, 0x25, 0xb7);
+
+#define DUALBOX_DEVICE_TYPE 0x8000
+
+#define IOCTL_DUALBOX_SUBMIT_INPUT \
+    CTL_CODE(DUALBOX_DEVICE_TYPE, 0x801, METHOD_BUFFERED, FILE_WRITE_DATA)
+
+#define IOCTL_DUALBOX_GET_FEEDBACK \
+    CTL_CODE(DUALBOX_DEVICE_TYPE, 0x802, METHOD_BUFFERED, FILE_READ_DATA)
+
+#define DUALBOX_INPUT_REPORT_ID 0x01
+#define DUALBOX_FEEDBACK_REPORT_ID 0x05
+
+#pragma pack(push, 1)
+
+typedef struct _DUALBOX_INPUT_REPORT {
+    UCHAR ReportId;
+    SHORT LeftStickX;
+    SHORT LeftStickY;
+    SHORT RightStickX;
+    SHORT RightStickY;
+    UCHAR LeftTrigger;
+    UCHAR RightTrigger;
+    USHORT Buttons;
+    UCHAR Dpad;
+} DUALBOX_INPUT_REPORT, *PDUALBOX_INPUT_REPORT;
+
+typedef struct _DUALBOX_FEEDBACK_REPORT {
+    UCHAR ReportId;
+    UCHAR LeftMotor;
+    UCHAR RightMotor;
+    UCHAR LeftTriggerMotor;
+    UCHAR RightTriggerMotor;
+} DUALBOX_FEEDBACK_REPORT, *PDUALBOX_FEEDBACK_REPORT;
+
+#pragma pack(pop)

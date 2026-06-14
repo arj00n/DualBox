@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DualBox.App", "src\DualBox.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DualBox.ProtocolSelfTest", "src\DualBox.ProtocolSelfTest\DualBox.ProtocolSelfTest.csproj", "{A54165DF-7246-41C4-A933-7AE55AF92FF5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DualBoxVirtualPad", "drivers\DualBoxVirtualPad\DualBoxVirtualPad.vcxproj", "{5F35F8C8-26D0-4B99-9D67-66E29C9C257E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -20,6 +22,10 @@ Global
 		{A54165DF-7246-41C4-A933-7AE55AF92FF5}.Debug|x64.Build.0 = Debug|x64
 		{A54165DF-7246-41C4-A933-7AE55AF92FF5}.Release|x64.ActiveCfg = Release|x64
 		{A54165DF-7246-41C4-A933-7AE55AF92FF5}.Release|x64.Build.0 = Release|x64
+		{5F35F8C8-26D0-4B99-9D67-66E29C9C257E}.Debug|x64.ActiveCfg = Debug|x64
+		{5F35F8C8-26D0-4B99-9D67-66E29C9C257E}.Debug|x64.Build.0 = Debug|x64
+		{5F35F8C8-26D0-4B99-9D67-66E29C9C257E}.Release|x64.ActiveCfg = Release|x64
+		{5F35F8C8-26D0-4B99-9D67-66E29C9C257E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
