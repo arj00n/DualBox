@@ -20,7 +20,7 @@ public partial class MainWindow : Window
         _bridge.Log += (_, message) => Dispatcher.Invoke(() => AddLog(message));
         _bridge.StateChanged += (_, state) => Dispatcher.Invoke(() => ApplyState(state));
         _bridge.InputReceived += (_, report) => Dispatcher.Invoke(() => ApplyInput(report));
-        _bridge.RumbleReceived += (_, rumble) => Dispatcher.Invoke(() => ApplyRumble(rumble));
+        _bridge.FeedbackReceived += (_, feedback) => Dispatcher.Invoke(() => ApplyFeedback(feedback));
 
         Loaded += (_, _) => CheckPrerequisites();
         Closing += async (_, _) => await _bridge.StopAsync();
@@ -68,14 +68,14 @@ public partial class MainWindow : Window
 
         try
         {
-            await _bridge.TestRumbleAsync();
+            await _bridge.TestFeedbackAsync();
         }
         catch (OperationCanceledException)
         {
         }
         catch (Exception ex)
         {
-            AddLog("Rumble test failed: " + ex.Message);
+            AddLog("Feedback test failed: " + ex.Message);
         }
         finally
         {
@@ -214,9 +214,10 @@ public partial class MainWindow : Window
         RightDeadzoneText.Text = $"Right deadzone: {settings.RightStickDeadzone:P0}";
     }
 
-    private void ApplyRumble(XboxRumble rumble)
+    private void ApplyFeedback(XboxGamepadFeedback feedback)
     {
-        RumbleText.Text = $"Last rumble: large {rumble.LargeMotor}, small {rumble.SmallMotor}";
+        RumbleText.Text =
+            $"Last feedback: left {feedback.LeftMotor}, right {feedback.RightMotor}, LT {feedback.LeftTriggerMotor}, RT {feedback.RightTriggerMotor}";
     }
 
     private void AddLog(string message)

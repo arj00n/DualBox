@@ -24,14 +24,14 @@ Use this on the Windows machine that has the DualSense and Game Pass installed.
 5. Press L2 and R2 and confirm they have resistance.
 6. Change adaptive triggers to `Off`, then confirm L2/R2 return to normal.
 7. Change adaptive triggers back to `Racing`.
-8. Click `Test rumble`.
+8. Click `Test feedback`.
 9. Confirm the DualSense vibrates briefly.
 10. Press the PS button.
 11. Confirm Xbox Game Bar opens.
 12. Leave both sticks untouched and watch the live stick values.
 13. Raise the left/right deadzone sliders until `Filtered Xbox sticks` returns to `0, 0` and `Drift status` says the filtered output is centered while the sticks are untouched.
 14. Open `joy.cpl`.
-15. Confirm an Xbox 360 controller appears.
+15. Confirm the virtual Xbox controller appears.
 16. Open the Xbox controller properties and verify:
    - Left and right sticks move correctly.
    - L2 and R2 move the trigger bars.
@@ -74,6 +74,6 @@ Use this on the Windows machine that has the DualSense and Game Pass installed.
    - Whether deadzone settings eliminate idle steering/camera drift.
    - Whether the motors feel too weak, harsh, or delayed.
 
-## Known limits
+## Backend note
 
-The bridge translates XInput rumble into DualSense-compatible motor output. Native DualSense adaptive triggers and PS5 HD haptic effects require game-specific DualSense output, which XInput-only Game Pass titles generally do not provide.
+DualBox now uses an Xbox One-style feedback model internally: left motor, right motor, left trigger motor, and right trigger motor. The packaged backend still uses ViGEmBus for XInput compatibility until the true Xbox One virtual device backend is added.

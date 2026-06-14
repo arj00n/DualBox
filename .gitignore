@@ -5,3 +5,4 @@ artifacts/*
 !artifacts/DualBox-win-x64.zip
 *.user
 *.suo
+.DS_Store

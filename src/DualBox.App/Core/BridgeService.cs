@@ -8,7 +8,7 @@ public sealed class BridgeService : IAsyncDisposable
     private CancellationTokenSource? _cts;
     private Task? _readLoop;
     private DualSenseHidDevice? _dualSense;
-    private VirtualXboxController? _virtualXbox;
+    private IXboxBridgeBackend? _xboxBackend;
     private readonly RumbleTranslator _rumbleTranslator = new(RumbleProfile.Racing);
     private MappingProfile _profile = AppSettings.Default.ToMappingProfile();
 
@@ -17,7 +17,7 @@ public sealed class BridgeService : IAsyncDisposable
     public event EventHandler<string>? Log;
     public event EventHandler<BridgeState>? StateChanged;
     public event EventHandler<DualSenseInputReport>? InputReceived;
-    public event EventHandler<XboxRumble>? RumbleReceived;
+    public event EventHandler<XboxGamepadFeedback>? FeedbackReceived;
 
     public async Task StartAsync(MappingProfile profile)
     {
@@ -32,33 +32,33 @@ public sealed class BridgeService : IAsyncDisposable
 
         _dualSense = DualSenseHidDevice.Open(deviceInfo);
         _dualSense.SetTriggerState(GetTriggerState(profile.TriggerProfile));
-        _virtualXbox = new VirtualXboxController();
-        _virtualXbox.RumbleReceived += ForwardRumble;
-        _virtualXbox.Connect();
+        _xboxBackend = new XInputCompatibilityBackend();
+        _xboxBackend.FeedbackReceived += ForwardFeedback;
+        _xboxBackend.Connect();
 
         _cts = new CancellationTokenSource();
         _readLoop = Task.Run(() => ReadLoop(_cts.Token), _cts.Token);
 
         LogMessage("Connected to " + deviceInfo.DisplayName);
-        LogMessage("Virtual Xbox 360 controller is online.");
+        LogMessage("Xbox One bridge is online using " + _xboxBackend.DisplayName + ".");
         PublishState(true, deviceInfo.DisplayName);
 
         await Task.CompletedTask;
     }
 
-    public async Task TestRumbleAsync()
+    public async Task TestFeedbackAsync()
     {
         if (_dualSense is null)
         {
-            throw new InvalidOperationException("Start the bridge before testing rumble.");
+            throw new InvalidOperationException("Start the bridge before testing feedback.");
         }
 
-        LogMessage("Running DualSense rumble test.");
+        LogMessage("Running Xbox One-style feedback test.");
 
         try
         {
             _dualSense.SetRumble(smallMotor: 96, largeMotor: 192);
-            RumbleReceived?.Invoke(this, new XboxRumble(192, 96));
+            FeedbackReceived?.Invoke(this, new XboxGamepadFeedback(192, 96, 128, 128));
             await Task.Delay(450, _cts?.Token ?? CancellationToken.None);
         }
         finally
@@ -108,14 +108,14 @@ public sealed class BridgeService : IAsyncDisposable
             }
         }
 
-        if (_virtualXbox is not null)
+        if (_xboxBackend is not null)
         {
-            _virtualXbox.RumbleReceived -= ForwardRumble;
-            _virtualXbox.Dispose();
+            _xboxBackend.FeedbackReceived -= ForwardFeedback;
+            _xboxBackend.Dispose();
         }
 
         _rumbleTranslator.Reset();
-        _virtualXbox = null;
+        _xboxBackend = null;
         _dualSense = null;
         _readLoop = null;
         _cts.Dispose();
@@ -127,7 +127,7 @@ public sealed class BridgeService : IAsyncDisposable
 
     private void ReadLoop(CancellationToken token)
     {
-        if (_dualSense is null || _virtualXbox is null)
+        if (_dualSense is null || _xboxBackend is null)
         {
             return;
         }
@@ -143,7 +143,7 @@ public sealed class BridgeService : IAsyncDisposable
                 }
 
                 HandleSystemShortcuts(report);
-                _virtualXbox.Apply(report, _profile);
+                _xboxBackend.Apply(report, _profile);
                 InputReceived?.Invoke(this, report);
             }
             catch when (token.IsCancellationRequested)
@@ -158,18 +158,18 @@ public sealed class BridgeService : IAsyncDisposable
         }
     }
 
-    private void ForwardRumble(object? sender, XboxRumble rumble)
+    private void ForwardFeedback(object? sender, XboxGamepadFeedback feedback)
     {
-        RumbleReceived?.Invoke(this, rumble);
+        FeedbackReceived?.Invoke(this, feedback);
 
         try
         {
-            var dualSenseRumble = _rumbleTranslator.Translate(rumble);
+            var dualSenseRumble = _rumbleTranslator.Translate(feedback);
             _dualSense?.SetRumble(dualSenseRumble.SmallMotor, dualSenseRumble.LargeMotor);
         }
         catch (Exception ex)
         {
-            LogMessage("Rumble forwarding failed: " + ex.Message);
+            LogMessage("Feedback forwarding failed: " + ex.Message);
         }
     }
 

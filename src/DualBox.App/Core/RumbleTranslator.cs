@@ -14,12 +14,15 @@ public sealed class RumbleTranslator
         _profile = profile;
     }
 
-    public DualSenseRumble Translate(XboxRumble rumble)
+    public DualSenseRumble Translate(XboxGamepadFeedback feedback)
     {
-        var large = Scale(rumble.LargeMotor, _profile.LargeMotorGain);
-        var small = Scale(rumble.SmallMotor, _profile.SmallMotorGain);
+        var large = Scale(feedback.LeftMotor, _profile.LargeMotorGain);
+        var small = Scale(feedback.RightMotor, _profile.SmallMotorGain);
+        var leftTrigger = Scale(feedback.LeftTriggerMotor, _profile.TriggerMotorGain);
+        var rightTrigger = Scale(feedback.RightTriggerMotor, _profile.TriggerMotorGain);
 
-        small = Math.Clamp(small + large * _profile.TextureFromLargeMotor, 0, 1);
+        small = Math.Clamp(small + large * _profile.TextureFromLargeMotor + rightTrigger * 0.45, 0, 1);
+        large = Math.Clamp(large + leftTrigger * 0.35, 0, 1);
 
         if (large < _profile.Deadzone)
         {

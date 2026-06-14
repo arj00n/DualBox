@@ -11,7 +11,7 @@
 
     <StackPanel Grid.Row="0">
       <TextBlock Text="DualBox" FontSize="30" FontWeight="SemiBold" />
-      <TextBlock Text="PS5 DualSense to virtual Xbox controller bridge" Foreground="#AAB2C0" Margin="0,6,0,18" />
+      <TextBlock Text="PS5 DualSense to Xbox One-style controller bridge" Foreground="#AAB2C0" Margin="0,6,0,18" />
     </StackPanel>
 
     <Border Grid.Row="1" Background="#181C24" BorderBrush="#2A3140" BorderThickness="1" CornerRadius="8" Padding="18">
@@ -48,7 +48,7 @@
           <StackPanel Orientation="Horizontal">
             <Button x:Name="StartButton" Content="Start bridge" Click="StartButton_OnClick" />
             <Button x:Name="StopButton" Content="Stop" Click="StopButton_OnClick" IsEnabled="False" />
-            <Button x:Name="RumbleButton" Content="Test rumble" Click="RumbleButton_OnClick" IsEnabled="False" />
+            <Button x:Name="RumbleButton" Content="Test feedback" Click="RumbleButton_OnClick" IsEnabled="False" />
           </StackPanel>
         </StackPanel>
       </Grid>
@@ -81,7 +81,7 @@
           <ProgressBar x:Name="LeftTriggerBar" Minimum="0" Maximum="255" Height="8" Margin="0,0,0,8" />
           <ProgressBar x:Name="RightTriggerBar" Minimum="0" Maximum="255" Height="8" Margin="0,0,0,12" />
           <TextBlock x:Name="ButtonText" Text="Buttons: -" Foreground="#D9DEE8" TextWrapping="Wrap" Margin="0,0,0,18" />
-          <TextBlock x:Name="RumbleText" Text="Last rumble: -" Foreground="#D9DEE8" Margin="0,0,0,18" />
+          <TextBlock x:Name="RumbleText" Text="Last feedback: -" Foreground="#D9DEE8" TextWrapping="Wrap" Margin="0,0,0,18" />
           <TextBlock Text="Stick drift fix" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
           <TextBlock x:Name="LeftDeadzoneText" Text="Left deadzone: 7%" Foreground="#AAB2C0" Margin="0,0,0,4" />
           <Slider x:Name="LeftDeadzoneSlider" Minimum="0" Maximum="0.25" Value="0.07" TickFrequency="0.01" IsSnapToTickEnabled="True" ValueChanged="SettingsSlider_OnChanged" Margin="0,0,0,10" />

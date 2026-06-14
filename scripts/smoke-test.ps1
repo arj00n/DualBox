@@ -50,4 +50,4 @@ if ($Build) {
 }
 
 Write-Host ""
-Write-Host "Next: run the app, click Start bridge, click Test rumble, then check joy.cpl for an Xbox 360 controller."
+Write-Host "Next: run the app, click Start bridge, click Test feedback, then check joy.cpl for the virtual Xbox controller."

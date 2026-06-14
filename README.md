@@ -1,18 +1,19 @@
 # DualBox
 
-DualBox turns a PS5 DualSense or DualSense Edge into a virtual Xbox controller for Windows Game Pass and XInput-first PC games.
+DualBox turns a PS5 DualSense or DualSense Edge into an Xbox One-style controller bridge for Windows Game Pass and PC games.
 
 ## Features
 
 - DualSense USB and Bluetooth input support
-- Virtual Xbox 360 controller output through ViGEmBus
-- DualSense vibration from Xbox rumble feedback
+- Xbox One-style feedback pipeline with main motors and trigger motors
+- Current packaged backend: XInput compatibility through ViGEmBus
+- DualSense vibration from Xbox feedback
 - Racing-tuned rumble shaping
 - Racing adaptive-trigger profile
 - Touchpad mapping for View/Back, Menu/Start, Guide, or disabled
 - PS button shortcut for Xbox Game Bar
 - Stick deadzone controls for drift cleanup
-- Live input, trigger, button, rumble, and drift status panel
+- Live input, trigger, button, feedback, and drift status panel
 - Optional launch on Windows startup
 
 ## Download
@@ -78,10 +79,10 @@ artifacts\DualBox-win-x64.zip
 5. Keep adaptive triggers set to `Racing`.
 6. Click `Start bridge`.
 7. Press L2/R2 and confirm the triggers have resistance.
-8. Click `Test rumble` and confirm the DualSense vibrates.
+8. Click `Test feedback` and confirm the DualSense vibrates.
 9. Press the PS button and confirm Xbox Game Bar opens.
 10. Move both sticks and adjust deadzone sliders until `Drift status` says the filtered output is centered while the sticks are untouched.
-11. Open `joy.cpl` from Windows Run and confirm an Xbox 360 controller appears.
+11. Open `joy.cpl` from Windows Run and confirm the virtual Xbox controller appears.
 12. Start the game.
 13. If the map does not open from touchpad press, stop the bridge and try `Menu / Start`.
 
@@ -101,14 +102,16 @@ The game should now only see the virtual Xbox controller.
 
 - USB input parsing: implemented
 - Bluetooth input parsing: implemented
-- USB rumble output: implemented
-- Bluetooth rumble output: implemented
+- USB feedback output: implemented
+- Bluetooth feedback output: implemented
+- Xbox One-style four-channel feedback model: implemented
+- XInput compatibility backend: implemented
 - Racing-biased rumble shaping: implemented
 - Racing adaptive-trigger profile: implemented
 - PS button to Game Bar hotkey: implemented
 - Start with Windows: implemented via HKCU Run key
 - Stick drift deadzone controls: implemented
-- Virtual Xbox 360 output: implemented
+- True Xbox One virtual device backend: planned
 - Touchpad-to-map-style binding: implemented
 
 See [docs/TEST_PLAN.md](docs/TEST_PLAN.md) for the step-by-step Windows validation flow, [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for likely first-test issues, and [docs/PROTOCOL_NOTES.md](docs/PROTOCOL_NOTES.md) for HID report references.

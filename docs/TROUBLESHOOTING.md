@@ -41,16 +41,17 @@ Expected baseline:
 - Options -> Start/Menu
 - Touchpad press -> Back/View by default
 
-## Rumble works in the app but not in-game
+## Feedback works in the app but not in-game
 
-The game may not be sending XInput vibration events, or the virtual controller may not be the active input device. Confirm HidHide is hiding the physical DualSense, then test rumble in a known XInput controller tester or another game.
+The game may not be sending controller feedback events, or the virtual controller may not be the active input device. Confirm HidHide is hiding the physical DualSense, then test feedback in another game or controller tester.
 
-## Rumble feels harsh or delayed
+## Feedback feels harsh or delayed
 
-The app currently uses the built-in racing rumble profile in `RumbleProfile.Racing`. Tune these values:
+The app uses the built-in racing feedback profile in `RumbleProfile.Racing`. Tune these values:
 
 - `LargeMotorGain` for heavy road/impact feel.
 - `SmallMotorGain` for sharper texture.
+- `TriggerMotorGain` for trigger feedback strength.
 - `TextureFromLargeMotor` for extra surface detail.
 - `Deadzone` to suppress idle buzz.
 - `Smoothing` to reduce chatter at the cost of response speed.
@@ -61,9 +62,9 @@ Make sure the app's adaptive trigger selector is set to `Racing`. The current tr
 
 If the triggers still feel normal, use USB for validation first. Bluetooth trigger output is implemented with the shifted Bluetooth report offsets and CRC framing, but USB has fewer variables.
 
-## Adaptive triggers feel generic
+## Xbox One trigger feedback is missing
 
-That is expected for Xbox-emulation mode. XInput has ordinary vibration but no DualSense adaptive-trigger data. DualBox can apply a racing profile locally, but it cannot receive true PS5 game-authored trigger curves from an XInput-only Game Pass title.
+The app has four-channel Xbox One-style feedback plumbing. The current packaged ViGEm backend exposes XInput feedback, so trigger feedback values remain zero until the true Xbox One virtual device backend is added.
 
 ## Settings reset unexpectedly
 

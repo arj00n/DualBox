@@ -36,14 +36,14 @@ internal sealed class ProtocolTests
     public void ShapeRacingRumble()
     {
         var translator = new RumbleTranslator(RumbleProfile.Racing);
-        var shaped = translator.Translate(new XboxRumble(LargeMotor: 255, SmallMotor: 90));
+        var shaped = translator.Translate(new XboxGamepadFeedback(LeftMotor: 255, RightMotor: 90));
 
         Assert(shaped.LargeMotor > 0, "Large DualSense motor should be active.");
         Assert(shaped.SmallMotor > 0, "Small DualSense motor should be active.");
         Assert(shaped.SmallMotor > 90, "Racing profile should blend road texture into the small motor.");
 
         translator.Reset();
-        var idle = translator.Translate(new XboxRumble(0, 0));
+        var idle = translator.Translate(new XboxGamepadFeedback(0, 0));
         Assert(idle.LargeMotor == 0 && idle.SmallMotor == 0, "Zero rumble should stay zero.");
     }
 

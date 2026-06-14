@@ -3,6 +3,7 @@ namespace DualBox.Core;
 public sealed record RumbleProfile(
     double LargeMotorGain,
     double SmallMotorGain,
+    double TriggerMotorGain,
     double TextureFromLargeMotor,
     double Deadzone,
     double Smoothing)
@@ -10,6 +11,7 @@ public sealed record RumbleProfile(
     public static RumbleProfile Racing { get; } = new(
         LargeMotorGain: 1.10,
         SmallMotorGain: 0.95,
+        TriggerMotorGain: 1.15,
         TextureFromLargeMotor: 0.18,
         Deadzone: 0.035,
         Smoothing: 0.28);
